@@ -6,13 +6,10 @@ public class PlayerMovement : MonoBehaviour
 {
 	[Header("Movement")]
 	public float movementSpeed = 10f;
-	public bool isMoving = false;
+	public bool isMoving;
 	Vector2 movement;
 	Rigidbody2D rb;
-
 	
-
-
 	[Header("Dash mechanic")]
 	[SerializeField] private float dashCooldown = 1f;
 	float timeBetweenDash;
@@ -20,22 +17,24 @@ public class PlayerMovement : MonoBehaviour
 	public float dashForce = 20f;
 	public float dashDuration = 0.1f;
 
+	private PlayerInput playerInput;
+
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		playerInput = new PlayerInput();
 	}
 
 	void Update()
 	{
-		movement.x = Input.GetAxisRaw("Horizontal");
-		movement.y = Input.GetAxisRaw("Vertical");
+		movement = playerInput.GetMovementInput();
 
-		isMoving = movement.x != 0 || movement.y != 0;
+		isMoving = movement != Vector2.zero;
 
 		// Dash mechanic
 		if (timeBetweenDash <= 0 && !isDashing)
 		{
-			if (Input.GetKeyDown(KeyCode.LeftShift) && isMoving)
+			if (playerInput.IsDashPressed() && isMoving)
 			{
 				StartCoroutine(PerformDash());
 				timeBetweenDash = dashCooldown;
