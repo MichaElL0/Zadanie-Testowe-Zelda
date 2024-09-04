@@ -15,4 +15,9 @@ public class PlayerInput
 	{
 		return Input.GetKeyDown(KeyCode.LeftShift);
 	}
+
+	public bool IsAttackPressed()
+	{
+		return Input.GetKeyDown(KeyCode.Space);
+	}
 }

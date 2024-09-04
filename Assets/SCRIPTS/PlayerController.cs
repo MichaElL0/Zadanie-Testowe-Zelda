@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 	void Start()
     {
 		healthScript = GetComponent<Health>();
+        Cursor.lockState = CursorLockMode.Locked;
 	}
 
     // Update is called once per frame

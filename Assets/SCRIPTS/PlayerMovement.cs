@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 	public bool isMoving;
 	Vector2 movement;
 	Rigidbody2D rb;
+	bool isFacingRight = true;
 	
 	[Header("Dash mechanic")]
 	[SerializeField] private float dashCooldown = 1f;
@@ -31,6 +32,17 @@ public class PlayerMovement : MonoBehaviour
 
 		isMoving = movement != Vector2.zero;
 
+		//Flip sprite
+		if (movement.x > 0 && !isFacingRight)
+		{
+			Flip();
+		}
+		else if (movement.x < 0 && isFacingRight)
+		{
+			Flip();
+		}
+
+
 		// Dash mechanic
 		if (timeBetweenDash <= 0 && !isDashing)
 		{
@@ -44,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
 		{
 			timeBetweenDash -= Time.deltaTime;
 		}
+
+		
 	}
 
 	void FixedUpdate()
@@ -65,5 +79,13 @@ public class PlayerMovement : MonoBehaviour
 
 		rb.velocity = Vector2.zero;
 		isDashing = false;
+	}
+
+	void Flip()
+	{
+		Vector3 currScale = gameObject.transform.localScale;
+		currScale.x *= -1;
+		gameObject.transform.localScale = currScale;
+		isFacingRight = !isFacingRight;
 	}
 }

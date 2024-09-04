@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int maxHealth;
-    int currentHealth;
-    public string name;
-    //itd...
+    [SerializeField] int maxHealth;
+    [SerializeField] int currentHealth;
+    public string charaterName;
     public bool IsAlive => currentHealth > 0;
 
 	private void Start()
@@ -19,6 +18,7 @@ public class Health : MonoBehaviour
     {
         currentHealth -= damageAmmount;
         currentHealth = Mathf.Max(currentHealth, 0);
+        print($"{charaterName} took {damageAmmount} damage!");
         return !IsAlive;
     }
 
