@@ -26,15 +26,13 @@ public class PlayerCombat : MonoBehaviour
     {
 		if (timeBtwnAttack <= 0)
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(playerinput.IsAttackPressed())
             {
-                print("attack");
                 int damage = UnityEngine.Random.Range(minDamage, maxDamage);
                 Collider2D[] enemiesToDamage =  Physics2D.OverlapCircleAll(attackPos.position, radius, enemyMask);
                 foreach(var enemy in enemiesToDamage)
                 {
                     enemy.GetComponent<Health>().TakeDamage(damage);
-                    print("Attack");
                 }
 				timeBtwnAttack = startTimeBtwnAttack;
 			}

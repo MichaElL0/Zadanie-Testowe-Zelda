@@ -18,6 +18,10 @@ public class PlayerInput
 
 	public bool IsAttackPressed()
 	{
+		return Input.GetMouseButtonDown(0);
+	}
+	public bool IsSaltoPressed()
+	{
 		return Input.GetKeyDown(KeyCode.Space);
 	}
 }

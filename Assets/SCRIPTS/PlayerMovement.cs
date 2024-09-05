@@ -18,7 +18,12 @@ public class PlayerMovement : MonoBehaviour
 	public float dashForce = 20f;
 	public float dashDuration = 0.1f;
 
-	private PlayerInput playerInput;
+	[Header("Salto mechanic")]
+	bool isSalting = false; 
+	private float saltoCooldown = 1f;      
+	private float timeBtwnSalto;      
+
+	PlayerInput playerInput;
 
 	private void Awake()
 	{
@@ -57,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
 			timeBetweenDash -= Time.deltaTime;
 		}
 
-		
 	}
 
 	void FixedUpdate()
@@ -66,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			rb.MovePosition(rb.position + movementSpeed * Time.fixedDeltaTime * movement.normalized);
 		}
+
 	}
 
 	// Coroutine to handle the dash action

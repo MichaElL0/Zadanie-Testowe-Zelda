@@ -24,7 +24,9 @@ public class EnemyController : MonoBehaviour
 	{
 		Debug.LogAssertion($"{healthScript.name} has died. RIP!");
 
+		ParticleSystem deathEffect = Instantiate(particle, transform.position, Quaternion.identity);
 
+		Destroy(deathEffect, 1f);
 		Destroy(gameObject);
 	}
 }
