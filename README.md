@@ -5,7 +5,7 @@
 * LEFT CLICK - ATTACK
 * SPACE - SALTO
 
-##Showcase
+## Showcase
 
 ![ezgif-6-2cb8629062](https://github.com/user-attachments/assets/0f1dadad-24a1-4fa9-a5ab-c317cd592711)
 
