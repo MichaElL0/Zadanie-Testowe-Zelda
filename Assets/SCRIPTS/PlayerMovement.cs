@@ -18,10 +18,10 @@ public class PlayerMovement : MonoBehaviour
 	public float dashForce = 20f;
 	public float dashDuration = 0.1f;
 
-	[Header("Salto mechanic")]
-	bool isSalting = false; 
-	private float saltoCooldown = 1f;      
-	private float timeBtwnSalto;      
+
+	bool isSalting = false;
+	[SerializeField] private float saltoCooldown = 1f;
+	float timeBetweenSalto;
 
 	PlayerInput playerInput;
 
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 		// Dash mechanic
-		if (timeBetweenDash <= 0 && !isDashing)
+		if (timeBetweenDash <= 0 && !isDashing && !isSalting)
 		{
 			if (playerInput.IsDashPressed() && isMoving)
 			{
@@ -62,6 +62,20 @@ public class PlayerMovement : MonoBehaviour
 			timeBetweenDash -= Time.deltaTime;
 		}
 
+		//Salto
+		if (timeBetweenSalto <= 0 && !isDashing && !isSalting)
+		{
+			if (playerInput.IsSaltoPressed() && !isSalting)
+			{
+				StartCoroutine(Teleport());
+				timeBetweenSalto = saltoCooldown;
+			}
+		}
+		else
+		{
+			timeBetweenSalto -= Time.deltaTime;
+		}
+
 	}
 
 	void FixedUpdate()
@@ -70,10 +84,8 @@ public class PlayerMovement : MonoBehaviour
 		{
 			rb.MovePosition(rb.position + movementSpeed * Time.fixedDeltaTime * movement.normalized);
 		}
-
 	}
 
-	// Coroutine to handle the dash action
 	private IEnumerator PerformDash()
 	{
 		isDashing = true;
@@ -84,6 +96,47 @@ public class PlayerMovement : MonoBehaviour
 
 		rb.velocity = Vector2.zero;
 		isDashing = false;
+	}
+
+	IEnumerator Teleport()
+	{
+		isSalting = true;
+		print("Is salting!");
+
+		float elapsedTime = 0;
+		float duration = 1;
+
+		Vector2 dir = transform.right.normalized;
+		Vector2 startPosition = rb.position;
+		Vector2 targetPosition = startPosition + dir * -2;
+
+		float startAngle = rb.rotation;
+		float targetAngle = startAngle + 360f;
+		float jumpHeight = 1f;
+
+		while (elapsedTime < duration)
+		{
+			float t = elapsedTime / duration;
+
+			Vector2 horizontalPosition = Vector2.Lerp(startPosition, targetPosition, t);
+
+			float verticalOffset = Mathf.Sin(t * Mathf.PI) * jumpHeight;
+			Vector2 jumpPosition = new Vector2(horizontalPosition.x, startPosition.y + verticalOffset);
+
+			rb.position = jumpPosition;
+
+			float currentAngle = Mathf.Lerp(startAngle, targetAngle, t);
+
+			rb.rotation = currentAngle;
+
+			elapsedTime += Time.fixedDeltaTime;
+			yield return new WaitForFixedUpdate();
+		}
+
+		rb.position = targetPosition;
+		rb.rotation = targetAngle % 360f;
+
+		isSalting = false;
 	}
 
 	void Flip()
