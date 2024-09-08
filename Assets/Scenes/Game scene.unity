@@ -1216,7 +1216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1403856126}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Attack position
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -1254,7 +1254,7 @@ GameObject:
   - component: {fileID: 1409872709}
   - component: {fileID: 1409872710}
   - component: {fileID: 1409872711}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PLAYER skeleton
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1831,6 +1831,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 273332743032872850, guid: 1af14a456e039db4bbfe1c46572cfc59, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513380743016592090, guid: 1af14a456e039db4bbfe1c46572cfc59, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2877986828845017364, guid: 1af14a456e039db4bbfe1c46572cfc59, type: 3}
       propertyPath: m_Name
       value: ENEMY
@@ -1874,6 +1882,18 @@ PrefabInstance:
     - target: {fileID: 7046311250587838968, guid: 1af14a456e039db4bbfe1c46572cfc59, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265811867714233786, guid: 1af14a456e039db4bbfe1c46572cfc59, type: 3}
+      propertyPath: radius
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265811867714233786, guid: 1af14a456e039db4bbfe1c46572cfc59, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265811867714233786, guid: 1af14a456e039db4bbfe1c46572cfc59, type: 3}
+      propertyPath: moveSpeed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -25,5 +25,7 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         print("Player died!");
+        print(":(");
+        Destroy(gameObject);
     }
 }
